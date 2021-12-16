@@ -1,0 +1,20 @@
+name: Lint
+
+on: [push]
+
+jobs:
+  eslint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Debug that we actually got node 16
+        run: |
+          echo $(node --version)
+          echo $(npm --version)
+      - name: Install modules
+        run: yarn
+      - name: Run ESLint
+        run: yarn run eslint . --ext .js,.jsx,.ts,.tsx
